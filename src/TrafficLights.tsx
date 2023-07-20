@@ -27,14 +27,17 @@ const TrafficLights = () => {
 
   const play = async () => {
     const instructions = generatePlaylist()
+    // Playback speed 1-1.5x
+    const playbackRate = 1 + ( Math.random() / 2 )
+    console.log('Setting playback rate to', playbackRate)
     setPlaying(true)
-    playMusic()
+    playMusic(playbackRate)
 
     for (const instruction of instructions) {
       const lights = instruction.lights
       const duration = instruction.duration
       setColors(lights)
-      await delay(duration)
+      await delay(duration / playbackRate)
     }
     setState(Off)
   }

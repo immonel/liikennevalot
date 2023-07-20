@@ -9,7 +9,8 @@ export const useAudio = (url: string, callback: () => void) => {
     callback()
   }
 
-  const play = () => {
+  const play = (playbackRate = 1) => {
+    audio.playbackRate = playbackRate
     void audio.play();
     setPlaying(true)
   }
@@ -22,7 +23,7 @@ export const useAudio = (url: string, callback: () => void) => {
 
   useEffect(() => {
     playing
-      ? play()
+      ? play(audio.playbackRate)
       : stop();
     }, [ playing ]
   );
