@@ -1,8 +1,13 @@
 import { useState, useEffect } from "react";
 
-export const useAudio = (url: string) => {
+export const useAudio = (url: string, callback: () => void) => {
   const [ audio ] = useState(new Audio(url));
   const [ playing, setPlaying ] = useState(false);
+
+  const audioEndedCallback = () => {
+    setPlaying(false)
+    callback()
+  }
 
   const play = () => {
     void audio.play();
@@ -23,9 +28,9 @@ export const useAudio = (url: string) => {
   );
 
   useEffect(() => {
-    audio.addEventListener('ended', () => setPlaying(false));
+    audio.addEventListener('ended', audioEndedCallback);
     return () => {
-      audio.removeEventListener('ended', () => setPlaying(false));
+      audio.removeEventListener('ended', audioEndedCallback);
     };
   }, []);
 

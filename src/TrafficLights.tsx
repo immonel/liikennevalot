@@ -13,7 +13,9 @@ const { Red, Yellow, Green, Off } = TrafficLight
 const TrafficLights = () => {
   const [ state,     setState    ] = useState(Off)
   const [ playing,   setPlaying  ] = useState(false)
-  const [ playMusic, stopMusic   ] = useAudio(pizzaTheme)
+
+  const audioEndedCallback = () => setPlaying(false)
+  const [ playMusic, stopMusic ] = useAudio(pizzaTheme, audioEndedCallback)
 
   // const toggleColor = (color: TrafficLight) => (
   //   setState(state ^ color)
@@ -35,7 +37,6 @@ const TrafficLights = () => {
       await delay(duration)
     }
     setState(Off)
-    setPlaying(false)
   }
 
   const stop = () => {
