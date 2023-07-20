@@ -7,6 +7,7 @@ import trafficLights from './assets/trafficLights.svg'
 import { delay, generatePlaylist } from "./utils/lights"
 import { useAudio } from "./utils/audio"
 import pizzaTheme from './assets/pizzatheme.mp3'
+import WebApp from "@twa-dev/sdk"
 
 const { Red, Yellow, Green, Off } = TrafficLight
 
@@ -51,6 +52,7 @@ const TrafficLights = () => {
   }
 
   const togglePlaying = () => {
+    WebApp.HapticFeedback.impactOccurred('rigid')
     playing
       ? stop()
       : void play()
