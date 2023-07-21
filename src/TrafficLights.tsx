@@ -60,7 +60,7 @@ const TrafficLights = () => {
 
   return (
     // <>
-    <button className="bg-transparent hover:border-transparent" onClick={togglePlaying}>
+    <button className="bg-transparent hover:border-transparent mt-14" onClick={togglePlaying}>
       <div className="w-[300px] relative flex justify-center align-middle">
           <img className="relative" src={trafficLights}></img>
           { Boolean(state & Red)    && <img className="absolute w-[66px] top-[40px]"  src={redLight} />    }
