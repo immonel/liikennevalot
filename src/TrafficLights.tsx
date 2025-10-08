@@ -28,8 +28,8 @@ const TrafficLights = () => {
 
   const play = async () => {
     const instructions = generatePlaylist()
-    // Playback speed 1-1.5x
-    const playbackRate = 1 + ( Math.random() / 2 )
+    // Playback speed 0.75-1.25x
+    const playbackRate = 0.75 + Math.random() * 0.5
     console.log('Setting playback rate to', playbackRate)
     setPlaying(true)
     playMusic(playbackRate)
