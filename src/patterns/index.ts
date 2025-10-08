@@ -12,15 +12,15 @@ ${repeat(`
   ${Yellow}             100
   ${Green}              100
 `, 3)}
-${Red}                  1000
-${Red | Yellow}         1000
-${Red | Yellow | Green} 1000
-${Off}                  4000
+${Red}                  900
+${Red | Yellow}         900
+${Red | Yellow | Green} 1600
+${Off}                  3500
 `
 
 const lightFlashPattern = (lights: TrafficLight) => (
   `
-  ${lights} 5000
+  ${lights} 4900
   ${Off} 500
   ${repeat(`${lights} 500 \n ${Off} 500`, 3)}
   ${repeat(`${lights} 250 \n ${Off} 250`, 4)}
