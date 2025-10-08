@@ -19,19 +19,25 @@ const parseInstructions = (input: string): Instruction[] => {
   const instructions: Instruction[] = []
 
   for (const line of input.split('\n')) {
-    const [ lightMask, lightDuration ] = line.split(' ')
+    const parts = line.trim().split(/\s+/)
 
-    if (!lightMask || !lightDuration)
+    if (parts.length < 2)
       continue
 
-    const mask = parseInt(lightMask, 2)
-    const lights = [ Red, Yellow, Green ].filter(light => light & mask)
+    const [ lightValue, lightDuration ] = parts
+
+    if (!lightValue || !lightDuration)
+      continue
+
+    const mask = parseInt(lightValue, 10)
     const duration = parseInt(lightDuration, 10)
-    
+
+    const lights = [ Red, Yellow, Green ].filter(light => light & mask)
     const instruction = { lights, duration } as Instruction
+
     instructions.push(instruction)
   }
-  
+
   return instructions
 }
 

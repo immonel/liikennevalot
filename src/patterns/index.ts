@@ -1,124 +1,33 @@
+import { TrafficLight } from "../types"
+
+const { Red, Yellow, Green, Off } = TrafficLight
+
+const repeat = (pattern: string, times: number) =>
+  Array(times).fill(pattern).join('\n') + '\n'
+
 export const initPattern =
 `
-100 100
-010 100
-001 100
-100 100
-010 100
-001 100
-100 100
-010 100
-001 100
-100 1000
-110 1000
-111 1000
-000 4000
+${repeat(`
+  ${Red}                100
+  ${Yellow}             100
+  ${Green}              100
+`, 3)}
+${Red}                  1000
+${Red | Yellow}         1000
+${Red | Yellow | Green} 1000
+${Off}                  4000
 `
 
-export const greenFlash =
-`
-001 5000
-000 500
-001 500
-000 500
-001 500
-000 500
-001 500
-000 500
-001 250
-000 250
-001 250
-000 250
-001 250
-000 250
-001 250
-000 250
-001 125
-000 125
-001 125
-000 125
-001 125
-000 125
-001 125
-000 125
-001 125
-000 125
-001 125
-000 125
-001 125
-000 125
-001 125
-000 125
-`
+const lightFlashPattern = (lights: TrafficLight) => (
+  `
+  ${lights} 5000
+  ${Off} 500
+  ${repeat(`${lights} 500 \n ${Off} 500`, 3)}
+  ${repeat(`${lights} 250 \n ${Off} 250`, 4)}
+  ${repeat(`${lights} 125 \n ${Off} 125`, 8)}
+  `
+)
 
-export const yellowFlash =
-`
-010 5000
-000 500
-010 500
-000 500
-010 500
-000 500
-010 500
-000 500
-010 250
-000 250
-010 250
-000 250
-010 250
-000 250
-010 250
-000 250
-010 125
-000 125
-010 125
-000 125
-010 125
-000 125
-010 125
-000 125
-010 125
-000 125
-010 125
-000 125
-010 125
-000 125
-010 125
-000 125
-`
-
-export const redFlash =
-`
-100 5000
-000 500
-100 500
-000 500
-100 500
-000 500
-100 500
-000 500
-100 250
-000 250
-100 250
-000 250
-100 250
-000 250
-100 250
-000 250
-100 125
-000 125
-100 125
-000 125
-100 125
-000 125
-100 125
-000 125
-100 125
-000 125
-100 125
-000 125
-100 125
-000 125
-100 125
-000 125
-`
+export const greenFlash  = lightFlashPattern(Green)
+export const yellowFlash = lightFlashPattern(Yellow)
+export const redFlash    = lightFlashPattern(Red)
