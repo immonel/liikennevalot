@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { TrafficLight } from "./types"
 import redLight from './assets/redLight.svg'
 import yellowLight from './assets/yellowLight.svg'
@@ -6,6 +6,7 @@ import greenLight from './assets/greenLight.svg'
 import trafficLights from './assets/trafficLights.svg'
 import { delay, generatePlaylist } from "./utils/lights"
 import { useAudio } from "./utils/audio"
+import { preloadImages } from "./utils/preload"
 import pizzaTheme from './assets/pizzatheme.mp3'
 import WebApp from "@twa-dev/sdk"
 
@@ -17,6 +18,10 @@ const TrafficLights = () => {
 
   const audioEndedCallback = () => setPlaying(false)
   const [ playMusic, stopMusic ] = useAudio(pizzaTheme, audioEndedCallback)
+
+  useEffect(() => {
+    void preloadImages([redLight, yellowLight, greenLight, trafficLights])
+  }, [])
 
   // const toggleColor = (color: TrafficLight) => (
   //   setState(state ^ color)
